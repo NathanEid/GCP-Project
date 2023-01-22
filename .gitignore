@@ -1,0 +1,6 @@
+.terraform/
+.terraform.lock.hcl
+terraform-user.json
+terraform.tfstate
+terraform.tfstate.backup
+.gitignore.swap
