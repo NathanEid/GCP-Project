@@ -4,4 +4,5 @@ resource "google_compute_subnetwork" "subnet" {
   region        = var.subnet_region
   network       = var.subnet_network
   project       = var.subnet_project
+  private_ip_google_access = true
 }
