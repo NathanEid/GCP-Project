@@ -1,3 +1,12 @@
+variable "service_account_id" {
+}
+
+variable "service_account_project" {
+}
+
+variable "service_account_role" {
+}
+
 variable "vm_name" {
 }
 
