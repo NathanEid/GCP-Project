@@ -42,6 +42,9 @@ module "nat" {
 
 module "private_vm" {
   source = "./vm"
+  service_account_id = "managment-cluster"
+  service_account_project = module.vpc.vpc_project
+  service_account_role = "roles/container.admin"
   vm_name = "my-vm"
   vm_type = "e2-micro"
   vm_zone = "europe-west1-b"
