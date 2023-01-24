@@ -57,7 +57,7 @@ module "private_vm" {
   ]
 }
 
-module "allow_ssh" {
+module "firewalls" {
   source = "./firewall"
   firewall_name = "allow-ssh"
   firewall_network = module.vpc.vpc_name
@@ -68,6 +68,18 @@ module "allow_ssh" {
   firewall_protocol = "tcp"
   firewall_ports = ["22"]
   firewall_tags = ["private"]
+
+  #################### egress #############
+
+  firewall_egress_name = "deny"
+  firewall_egress_direction = "EGRESS"
+  firewall_egress_source_ranges = module.restricted_subnet.subnet_cider
+  firewall_egress_protocol = "all"
+
+  depends_on = [
+    module.vpc,
+    module.restricted_subnet
+  ]
 }
 
 module "kubernetes_cluster" {
