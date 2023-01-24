@@ -4,3 +4,4 @@ terraform-user.json
 terraform.tfstate
 terraform.tfstate.backup
 .gitignore.swap
+.terraform.tfstate.lock.info
