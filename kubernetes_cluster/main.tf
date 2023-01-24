@@ -12,7 +12,7 @@ resource "google_project_iam_member" "kubernetes_role" {
 
 resource "google_container_cluster" "primary" {
   name     = "my-gke-cluster"
-  location = "europe-west1"
+  location = "us-west1"
   network = "vpc-network"
   subnetwork = "restricted-subnet"
 
@@ -54,7 +54,7 @@ resource "google_container_cluster" "primary" {
 
 resource "google_container_node_pool" "primary_preemptible_nodes" {
   name       = "my-node-pool"
-  location   = "europe-west1"
+  location   = "us-west1"
   cluster    = google_container_cluster.primary.name
   node_count = 1
 

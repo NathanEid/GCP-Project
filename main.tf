@@ -10,7 +10,7 @@ module "management_subnte" {
   source = "./subnet"
   subnet_name = "management-subnet"
   subnet_cider = "10.0.1.0/24"
-  subnet_region = "europe-west1"
+  subnet_region = "us-west1"
   subnet_network = module.vpc.vpc_id
   subnet_project = module.vpc.vpc_project
   depends_on = [
@@ -22,7 +22,7 @@ module "restricted_subnet" {
   source = "./subnet"
   subnet_name = "restricted-subnet"
   subnet_cider = "10.0.2.0/24"
-  subnet_region = "europe-west1"
+  subnet_region = "us-west1"
   subnet_network = module.vpc.vpc_id
   subnet_project = module.vpc.vpc_project
   depends_on = [
@@ -47,7 +47,7 @@ module "private_vm" {
   service_account_role = "roles/container.admin"
   vm_name = "my-vm"
   vm_type = "e2-micro"
-  vm_zone = "europe-west1-b"
+  vm_zone = "us-west1-b"
   vm_project = "nathan-eid"
   vm_tags = ["private"]
   vm_network = "management-subnet"
@@ -84,4 +84,7 @@ module "firewalls" {
 
 module "kubernetes_cluster" {
   source = "./kubernetes_cluster"
+  depends_on = [
+    module.restricted_subnet
+  ]
 }
