@@ -25,14 +25,14 @@ variable "firewall_ports" {
 variable "firewall_tags" {
 }
 
-variable "firewall_egress_name" {
-}
+# variable "firewall_egress_name" {
+# }
 
-variable "firewall_egress_direction" {
-}
+# variable "firewall_egress_direction" {
+# }
 
-variable "firewall_egress_source_ranges" {
-}
+# variable "firewall_egress_source_ranges" {
+# }
 
-variable "firewall_egress_protocol" {
-}
+# variable "firewall_egress_protocol" {
+# }

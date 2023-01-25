@@ -71,10 +71,10 @@ module "firewalls" {
 
   #################### egress #############
 
-  firewall_egress_name = "deny"
-  firewall_egress_direction = "EGRESS"
-  firewall_egress_source_ranges = module.restricted_subnet.subnet_cider
-  firewall_egress_protocol = "all"
+  # firewall_egress_name = "deny"
+  # firewall_egress_direction = "EGRESS"
+  # firewall_egress_source_ranges = module.restricted_subnet.subnet_cider
+  # firewall_egress_protocol = "all"
 
   depends_on = [
     module.vpc,

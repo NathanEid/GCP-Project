@@ -15,15 +15,15 @@ resource "google_compute_firewall" "firewall_rule" {
 }
 
 
-resource "google_compute_firewall" "firewall_rule_deny_egress" {
-  project     = var.firewall_project
-  name        = var.firewall_egress_name #"deny"
-  network     = var.firewall_network
-  direction = var.firewall_egress_direction #"EGRESS"
-  source_ranges = [ var.firewall_egress_source_ranges ]
+# resource "google_compute_firewall" "firewall_rule_deny_egress" {
+#   project     = var.firewall_project
+#   name        = var.firewall_egress_name #"deny"
+#   network     = var.firewall_network
+#   direction = var.firewall_egress_direction #"EGRESS"
+#   source_ranges = [ var.firewall_egress_source_ranges ]
 
-  deny {
-    protocol  = var.firewall_egress_protocol #"all"
-  }
+#   deny {
+#     protocol  = var.firewall_egress_protocol #"all"
+#   }
 
-}
+# }
