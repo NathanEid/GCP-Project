@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: redis-server
+  template:
+    metadata:
+      labels:
+        name: redis-server
+    spec:
+      containers:
+      - image: "us.gcr.io/nathan-eid/redis:latest"
+        name: redis-server
+        ports:
+        - containerPort: 6379
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-server
+spec:
+  selector:
+    name: redis-server
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379

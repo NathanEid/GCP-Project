@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: python-app
+  template:
+    metadata:
+      labels:
+        name: python-app
+    spec:
+      containers:
+      - image: "us.gcr.io/nathan-eid/python-app:latest"
+        name: python-app
+        env:
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_HOST
+          value: redis-server
+        ports:
+        - containerPort: 80
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-app
+spec:
+  type: LoadBalancer
+  selector:
+    name: python-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
