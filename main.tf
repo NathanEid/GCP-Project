@@ -84,6 +84,16 @@ module "firewalls" {
 
 module "kubernetes_cluster" {
   source = "./kubernetes_cluster"
+  k8s_service_project = module.vpc.vpc_project
+  k8s_cluster_name = "my-gke-cluster"
+  k8s_cluster_location = "us-west1"
+  k8s_cluster_network = module.vpc.vpc_name
+  k8s_cluster_subnetwork = module.restricted_subnet.subnet_name
+  k8s_cluster_count = 1
+  k8s_cluster_master_cider = "172.16.0.0/28"
+  k8s_cluster_cluster_cider = "192.168.0.0/16"
+  k8s_cluster_service_cider = "10.96.0.0/16"
+  k8s_cluster_node_name = "my-node-pool"
   depends_on = [
     module.restricted_subnet
   ]
