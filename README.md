@@ -41,8 +41,17 @@ custom SA and attach it to your nodes.
 
 3. SSH into the created VM to access the cluster and run the script "myscript.sh" and connect to the cluster
 
+![image](https://user-images.githubusercontent.com/40915944/214639904-1999531f-aaa5-4794-af12-93c4e8e7ffa2.png)
+
 4. Now the environment is ready to Create Kubernetes deployments and services by the Kubernetes .yaml files by using commands like:
     - kubectl apply -f redis.yaml
     - kubectl apply -f pythonAPP.yaml
 
+![ManageClusterFromVM](https://user-images.githubusercontent.com/40915944/214640074-346ef823-5022-4428-b333-b5b9c3fbbcad.png)
+
 5. Tack the Load Balancer IP from the cluster and hit in you browser to run the APP.
+
+![image](https://user-images.githubusercontent.com/40915944/214640521-2b8076c2-a4d0-4be4-b1dd-4fff7930c513.png)
+
+![FinalResult](https://user-images.githubusercontent.com/40915944/214640238-0811f8fc-dcd4-439a-a79d-a168dcc7e78b.png)
+
