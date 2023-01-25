@@ -31,6 +31,12 @@ custom SA and attach it to your nodes.
 2. Create your Docker images and push it in your Repo in Container Registery by using some commands after create your images, activate docker service account and docker configure:
     - docker tag python-app:latest us.gcr.io/nathan-eid/python-app:latest
     - docker push us.gcr.io/nathan-eid/python-app:latest
+![ActivateDockerSA](https://user-images.githubusercontent.com/40915944/214638693-75383ddb-7e90-4c28-a58b-e543464e90ea.png)
+
+![PushPythonImage](https://user-images.githubusercontent.com/40915944/214638977-2a257db6-598f-4107-92da-994b1a132164.png)
+
+![PushRedisImage](https://user-images.githubusercontent.com/40915944/214639007-d058b597-e2c8-427a-aaf5-5217c6b06818.png)
+
 
 3. SSH into the created VM to access the cluster and run the script "myscript.sh" and connect to the cluster
 
