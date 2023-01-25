@@ -6,4 +6,3 @@ terraform.tfstate.backup
 .gitignore.swap
 .terraform.tfstate.lock.info
 docker_key.json
-.env
