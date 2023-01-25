@@ -53,7 +53,7 @@ resource "google_container_cluster" "primary" {
 }
 
 resource "google_container_node_pool" "primary_preemptible_nodes" {
-  name       = var.k8s_cluster_node_name #"my-node-pool"
+  name       = var.k8s_cluster_node_name
   location   = "us-west1"
   cluster    = google_container_cluster.primary.name
   node_count = 1
@@ -64,7 +64,6 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
     disk_type = "pd-standard"
     disk_size_gb = 10
 
-    # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
     service_account = google_service_account.kubernetes.email
     oauth_scopes    = [
       "https://www.googleapis.com/auth/devstorage.read_only",
