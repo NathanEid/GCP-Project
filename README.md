@@ -1,14 +1,14 @@
 # GCP-Project
 
 ### Project Details
-1 VPC
-2 subnets (management subnet & restricted subnet):
+Create 1 VPC
+Create 2 subnets (management subnet & restricted subnet):
 1. Management subnet has the following:
-  • NAT gateway
-  • Private VM
+    - NAT gateway
+    - Private VM
 2. Restricted subnet has the following:
-  • Private standard GKE cluster (private control plan)
-Notes:
+    - Private standard GKE cluster (private control plan)
+##### Notes:
 1. Restricted subnet must not have access to internet
 2. All images deployed on GKE must come from GCR or Artifacts registry.
 3. The VM must be private.
@@ -21,8 +21,14 @@ https://github.com/atefhares/DevOps-Challenge-Demo-Code
 custom SA and attach it to your nodes.
 9. Only the management subnet can connect to the gke cluster.
 
+### Tools Used
+    - Terraform
+    - GCP
+    - Docker
+    - Kubernetes
+    - Python
 
-### To Run the Project
+### Get Started
 
 1. You should create the infrastructure first
     - terraform init
