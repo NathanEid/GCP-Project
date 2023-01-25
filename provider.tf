@@ -1,4 +1,4 @@
 provider "google" {
   project = "nathan-eid"
-  region = "us-west1"
+  region  = "us-west1"
 }

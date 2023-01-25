@@ -1,5 +1,5 @@
 resource "google_service_account" "kubernetes" {
-  account_id   = "kubernetes"
+  account_id = "kubernetes"
 }
 
 
@@ -11,9 +11,9 @@ resource "google_project_iam_member" "kubernetes_role" {
 
 
 resource "google_container_cluster" "primary" {
-  name     = var.k8s_cluster_name #"my-gke-cluster"
-  location = var.k8s_cluster_location #"us-west1"
-  network = var.k8s_cluster_network #"vpc-network"
+  name       = var.k8s_cluster_name       #"my-gke-cluster"
+  location   = var.k8s_cluster_location   #"us-west1"
+  network    = var.k8s_cluster_network    #"vpc-network"
   subnetwork = var.k8s_cluster_subnetwork #"restricted-subnet"
 
   remove_default_node_pool = true
@@ -39,14 +39,14 @@ resource "google_container_cluster" "primary" {
   }
 
   ip_allocation_policy {
-    cluster_ipv4_cidr_block = var.k8s_cluster_cluster_cider #"192.168.0.0/16"
+    cluster_ipv4_cidr_block  = var.k8s_cluster_cluster_cider #"192.168.0.0/16"
     services_ipv4_cidr_block = var.k8s_cluster_service_cider #"10.96.0.0/16" 
   }
 
   master_authorized_networks_config {
     cidr_blocks {
       display_name = "Management-subnet"
-      cidr_block = "10.0.1.0/24"
+      cidr_block   = "10.0.1.0/24"
     }
   }
 
@@ -61,11 +61,11 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
   node_config {
     preemptible  = true
     machine_type = "e2-micro"
-    disk_type = "pd-standard"
+    disk_type    = "pd-standard"
     disk_size_gb = 10
 
     service_account = google_service_account.kubernetes.email
-    oauth_scopes    = [
+    oauth_scopes = [
       "https://www.googleapis.com/auth/devstorage.read_only",
       "https://www.googleapis.com/auth/logging.write",
       "https://www.googleapis.com/auth/monitoring",

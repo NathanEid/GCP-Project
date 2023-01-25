@@ -1,16 +1,16 @@
 module "vpc" {
-  source = "./vpc"
-  vpc_project = "nathan-eid"
-  vpc_name = "vpc-network"
+  source                 = "./vpc"
+  vpc_project            = "nathan-eid"
+  vpc_name               = "vpc-network"
   vpc_auto_create_subnet = false
-  vpc_mtu = 1460
+  vpc_mtu                = 1460
 }
 
 module "management_subnte" {
-  source = "./subnet"
-  subnet_name = "management-subnet"
-  subnet_cider = "10.0.1.0/24"
-  subnet_region = "us-west1"
+  source         = "./subnet"
+  subnet_name    = "management-subnet"
+  subnet_cider   = "10.0.1.0/24"
+  subnet_region  = "us-west1"
   subnet_network = module.vpc.vpc_id
   subnet_project = module.vpc.vpc_project
   depends_on = [
@@ -19,10 +19,10 @@ module "management_subnte" {
 }
 
 module "restricted_subnet" {
-  source = "./subnet"
-  subnet_name = "restricted-subnet"
-  subnet_cider = "10.0.2.0/24"
-  subnet_region = "us-west1"
+  source         = "./subnet"
+  subnet_name    = "restricted-subnet"
+  subnet_cider   = "10.0.2.0/24"
+  subnet_region  = "us-west1"
   subnet_network = module.vpc.vpc_id
   subnet_project = module.vpc.vpc_project
   depends_on = [
@@ -31,43 +31,43 @@ module "restricted_subnet" {
 }
 
 module "nat" {
-  source = "./nat"
-  router_name = "my-router"
-  router_region = module.management_subnte.subnet_region
+  source         = "./nat"
+  router_name    = "my-router"
+  router_region  = module.management_subnte.subnet_region
   router_network = module.vpc.vpc_name
 
-  nat_router_name = "gateway-router"
+  nat_router_name            = "gateway-router"
   nat_router_subnetwork_name = module.management_subnte.subnet_name
 }
 
 module "private_vm" {
-  source = "./vm"
-  service_account_id = "managment-cluster"
+  source                  = "./vm"
+  service_account_id      = "managment-cluster"
   service_account_project = module.vpc.vpc_project
-  service_account_role = "roles/container.admin"
-  vm_name = "my-vm"
-  vm_type = "e2-micro"
-  vm_zone = "us-west1-b"
-  vm_project = "nathan-eid"
-  vm_tags = ["private"]
-  vm_network = "management-subnet"
-  vm_image = "ubuntu-os-cloud/ubuntu-2204-lts" #"custom-img-nginx"
+  service_account_role    = "roles/container.admin"
+  vm_name                 = "my-vm"
+  vm_type                 = "e2-micro"
+  vm_zone                 = "us-west1-b"
+  vm_project              = "nathan-eid"
+  vm_tags                 = ["private"]
+  vm_network              = "management-subnet"
+  vm_image                = "ubuntu-os-cloud/ubuntu-2204-lts" #"custom-img-nginx"
   depends_on = [
     module.management_subnte
   ]
 }
 
 module "firewalls" {
-  source = "./firewall"
-  firewall_name = "allow-ssh"
-  firewall_network = module.vpc.vpc_name
-  firewall_priority = 1000
-  firewall_direction = "INGRESS"
-  firewall_project = module.vpc.vpc_project
+  source                 = "./firewall"
+  firewall_name          = "allow-ssh"
+  firewall_network       = module.vpc.vpc_name
+  firewall_priority      = 1000
+  firewall_direction     = "INGRESS"
+  firewall_project       = module.vpc.vpc_project
   firewall_source_ranges = ["35.235.240.0/20"]
-  firewall_protocol = "tcp"
-  firewall_ports = ["22"]
-  firewall_tags = ["private"]
+  firewall_protocol      = "tcp"
+  firewall_ports         = ["22"]
+  firewall_tags          = ["private"]
 
   #################### egress #############
 
@@ -83,17 +83,17 @@ module "firewalls" {
 }
 
 module "kubernetes_cluster" {
-  source = "./kubernetes_cluster"
-  k8s_service_project = module.vpc.vpc_project
-  k8s_cluster_name = "my-gke-cluster"
-  k8s_cluster_location = "us-west1"
-  k8s_cluster_network = module.vpc.vpc_name
-  k8s_cluster_subnetwork = module.restricted_subnet.subnet_name
-  k8s_cluster_count = 1
-  k8s_cluster_master_cider = "172.16.0.0/28"
+  source                    = "./kubernetes_cluster"
+  k8s_service_project       = module.vpc.vpc_project
+  k8s_cluster_name          = "my-gke-cluster"
+  k8s_cluster_location      = "us-west1"
+  k8s_cluster_network       = module.vpc.vpc_name
+  k8s_cluster_subnetwork    = module.restricted_subnet.subnet_name
+  k8s_cluster_count         = 1
+  k8s_cluster_master_cider  = "172.16.0.0/28"
   k8s_cluster_cluster_cider = "192.168.0.0/16"
   k8s_cluster_service_cider = "10.96.0.0/16"
-  k8s_cluster_node_name = "my-node-pool"
+  k8s_cluster_node_name     = "my-node-pool"
   depends_on = [
     module.restricted_subnet
   ]
