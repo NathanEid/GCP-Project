@@ -34,7 +34,8 @@ custom SA and attach it to your nodes.
     - terraform init
     - terraform apply
 
-2. Create your Docker images and push it in your Repo in Container Registery by using some commands after build your images, activate docker service account and docker configure:
+2. Build your Docker images and push it in your Repo in Container Registery by using some commands after build your images, activate docker service account and docker configure:
+    - docker build -t python-app .
     - docker tag python-app:latest us.gcr.io/nathan-eid/python-app:latest
     - docker push us.gcr.io/nathan-eid/python-app:latest
 
@@ -49,7 +50,7 @@ custom SA and attach it to your nodes.
 
 ![image](https://user-images.githubusercontent.com/40915944/214639904-1999531f-aaa5-4794-af12-93c4e8e7ffa2.png)
 
-4. Now the environment is ready to Create Kubernetes deployments and services by the Kubernetes .yaml files by using commands like:
+4. Now the environment is ready to Create Kubernetes deployments and services by the Kubernetes .yaml files redis.yaml that biuld the deployment and service for the backend redis, and pythonApp.yaml to build the deployment and the load balancer service by using commands like:
     - kubectl apply -f redis.yaml
     - kubectl apply -f pythonAPP.yaml
 
