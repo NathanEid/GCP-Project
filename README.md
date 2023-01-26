@@ -34,7 +34,7 @@ custom SA and attach it to your nodes.
     - terraform init
     - terraform apply
 
-2. Create your Docker images and push it in your Repo in Container Registery by using some commands after create your images, activate docker service account and docker configure:
+2. Create your Docker images and push it in your Repo in Container Registery by using some commands after build your images, activate docker service account and docker configure:
     - docker tag python-app:latest us.gcr.io/nathan-eid/python-app:latest
     - docker push us.gcr.io/nathan-eid/python-app:latest
 
@@ -55,7 +55,7 @@ custom SA and attach it to your nodes.
 
 ![ManageClusterFromVM](https://user-images.githubusercontent.com/40915944/214640074-346ef823-5022-4428-b333-b5b9c3fbbcad.png)
 
-5. Tack the Load Balancer IP from the cluster and hit in you browser to run the APP.
+5. Take the Load Balancer IP from the cluster and hit in you browser to run the APP.
 
 ![image](https://user-images.githubusercontent.com/40915944/214640521-2b8076c2-a4d0-4be4-b1dd-4fff7930c513.png)
 
